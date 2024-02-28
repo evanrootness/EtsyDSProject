@@ -12,10 +12,9 @@ def one_hot_encode(init_data, list_of_categories):
     Returns:
         pd dataframe: Original dataframe with the categorical data appended in new columns.
     """
-    
+    data_copy = init_data.copy()
     for category in list_of_categories:
         temp_category_list = []
-        data_copy = init_data.copy()
         for i in range(len(data_copy['name'])):
             if (category in data_copy['name'].iloc[i]):
                 temp_category_list.append(1)
