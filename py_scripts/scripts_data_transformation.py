@@ -68,3 +68,10 @@ def order_words(word_dict, unique_list):
         ordered_list_nums.insert(index, word_dict[word])
         
     return np.array([ordered_list, ordered_list_nums])
+
+
+def remove_ordered_words(ordered_word_array, remove_list):
+    array_copy = ordered_word_array.copy()
+    for word in remove_list:
+        array_copy = np.array([list(np.delete(array_copy[0, :], list(array_copy[0]).index(word))), list(np.delete(array_copy[1, :], list(array_copy[0]).index(word)).astype(int))])
+    return array_copy

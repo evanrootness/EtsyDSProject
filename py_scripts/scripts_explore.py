@@ -52,3 +52,21 @@ def bar_plot_categories_median(dataset, cat_list, figx=15, figy=3):
     plt.legend()
     plt.title('Median minimum price on listing of different categories')
 
+
+
+def significance(data, ordered_list_of_words):
+    word_list = []
+    list_with = []
+    list_without = []
+    
+    for word in ordered_list_of_words:
+        word_list.append(word)
+
+        # list_with.append(data.query('{0} == 1'.format(word))['min_price'].median())
+        # list_without.append(data.query('{0} == 0'.format(word))['min_price'].median())
+        list_with.append(data.where(data[word] == 1).dropna(subset=word)['min_price'].median())
+        list_without.append(data.where(data[word] == 0).dropna(subset=word)['min_price'].median())
+        
+    # output a np.array of word and difference between 0 and 1 medians
+    return np.array([word_list, list_with, list_without])
+
